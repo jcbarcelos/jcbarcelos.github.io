@@ -1,1 +1,0 @@
-# jcbarcelos.github.io
