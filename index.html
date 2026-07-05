@@ -5,158 +5,234 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Política de Privacidade — Quebra-Cabeça</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: auto; padding: 20px; line-height: 1.6; color: #333; }
-    h1 { color: #6750A4; }
-    h2 { color: #444; margin-top: 30px; }
-    hr { border: none; border-top: 1px solid #ddd; margin: 30px 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7; color: #1a1a2e; background: #f8f9fc; padding: 20px;
+    }
+    .container { max-width: 800px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 40px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .lang-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+    .lang-bar label { font-size: 13px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; }
+    .lang-bar select {
+      padding: 6px 12px; border-radius: 8px; border: 1px solid #ddd;
+      font-size: 14px; background: #fff; color: #333; cursor: pointer;
+    }
+    .lang-bar select:focus { outline: none; border-color: #6750A4; }
+    h1 { font-size: 28px; color: #6750A4; margin-bottom: 8px; }
+    .date { color: #888; font-size: 14px; margin-bottom: 32px; }
+    h2 { font-size: 18px; color: #6750A4; margin: 28px 0 12px; }
+    p { margin-bottom: 14px; color: #333; }
+    ul { margin: 10px 0 14px 24px; }
+    li { margin-bottom: 8px; color: #333; }
+    strong { color: #1a1a2e; }
     a { color: #6750A4; }
+    .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; font-size: 13px; color: #888; text-align: center; }
   </style>
 </head>
 <body>
-  <h1>Política de Privacidade</h1>
-  <p><strong>Quebra-Cabeça — Jigsaw Puzzle</strong></p>
-  <p>Última atualização: 04 de julho de 2026</p>
+  <div class="container">
+    <div class="lang-bar">
+      <label for="langSelect">Idioma / Language / 语言</label>
+      <select id="langSelect">
+        <option value="pt">Português</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+        <option value="it">Italiano</option>
+        <option value="ja">日本語</option>
+        <option value="ko">한국어</option>
+        <option value="zh">中文</option>
+      </select>
+    </div>
+    <div id="content"></div>
+    <div class="footer">&copy; 2026 RCSB Info. Todos os direitos reservados.</div>
+  </div>
 
-  <hr>
+  <script>
+    const langs = ['pt', 'en', 'es', 'fr', 'de', 'it', 'ja', 'ko', 'zh'];
 
-  <h2>1. Introdução</h2>
-  <p>
-    Esta Política de Privacidade descreve como o aplicativo
-    <strong>Quebra-Cabeça</strong> ("nós", "nosso" ou "aplicativo")
-    coleta, usa e compartilha informações quando você utiliza nosso
-    aplicativo.
-  </p>
-  <p>
-    Ao utilizar o aplicativo, você concorda com as práticas descritas
-    nesta política.
-  </p>
+    const t = {
+      pt: {
+        title: 'Política de Privacidade',
+        subtitle: 'Quebra-Cabeça — Jigsaw Puzzle',
+        date: 'Última atualização: 04 de julho de 2026',
+        sections: [
+          { h: '1. Introdução', p: ['Esta Política de Privacidade descreve como o aplicativo Quebra-Cabeça coleta, usa e compartilha informações quando você utiliza nosso aplicativo.', 'Ao utilizar o aplicativo, você concorda com as práticas descritas nesta política.'] },
+          { h: '2. Dados Coletados', p: ['Não coletamos dados pessoais identificáveis. O aplicativo não requer cadastro, login, e-mail ou qualquer informação pessoal para funcionar.', 'As únicas informações armazenadas localmente no seu dispositivo são:'], ul: ['Progresso do jogo (puzzles concluídos, moedas, conquistas)', 'Preferências do usuário (idioma, tema, som)', 'Estatísticas de jogo'], p2: 'Esses dados são armazenados no armazenamento interno do dispositivo (SharedPreferences e FlutterSecureStorage) e nunca são enviados para nossos servidores.' },
+          { h: '3. Anúncios (Google AdMob)', p: ['Este aplicativo exibe anúncios fornecidos pelo Google AdMob. O AdMob pode coletar e usar informações para exibir anúncios personalizados ou não personalizados, incluindo:'], ul: ['Identificador de Publicidade do Android (AAID)', 'Endereço IP', 'Dados de uso do aplicativo', 'Tipo de dispositivo e versão do sistema operacional'], p2: 'Você pode optar por não receber anúncios personalizados ajustando as configurações de anúncios do seu dispositivo Android em Configurações → Google → Anúncios ou através das configurações de privacidade do AdMob.' },
+          { h: '4. Serviços de Terceiros', p: ['O aplicativo utiliza os seguintes serviços de terceiros:'], ul: ['Google AdMob — exibição de anúncios'] },
+          { h: '5. Permissões do Dispositivo', p: ['O aplicativo pode solicitar as seguintes permissões:'], ul: ['Internet — necessária para carregar anúncios e funcionalidades de backup', 'Notificações — para lembrete do puzzle diário (opcional, configurável)'] },
+          { h: '6. Segurança dos Dados', p: ['Os dados armazenados localmente no dispositivo são protegidos pelo sistema operacional Android. Não transmitimos, vendemos ou compartilhamos seus dados com terceiros, exceto conforme necessário para os serviços de anúncios descritos acima.'] },
+          { h: '7. Direitos do Usuário', p: ['Você tem o direito de:'], ul: ['Acessar — solicitar informações sobre os dados armazenados', 'Excluir — desinstalar o aplicativo para remover todos os dados locais', 'Opt-out de anúncios personalizados — conforme descrito na seção 3'] },
+          { h: '8. Crianças', p: ['O aplicativo é adequado para todas as idades, incluindo crianças. Não coletamos intencionalmente dados pessoais de crianças. Os anúncios exibidos podem ser configurados como não personalizados para cumprir com a COPPA, a critério do desenvolvedor no console do AdMob.'] },
+          { h: '9. Alterações nesta Política', p: ['Podemos atualizar esta Política de Privacidade periodicamente. Recomendamos revisar esta página regularmente. Alterações significativas serão notificadas através do aplicativo.'] },
+          { h: '10. Contato', p: ['Se você tiver dúvidas sobre esta Política de Privacidade, entre em contato pelo e-mail:<br><a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>'] },
+        ],
+      },
+      en: {
+        title: 'Privacy Policy',
+        subtitle: 'Quebra-Cabeça — Jigsaw Puzzle',
+        date: 'Last updated: July 4, 2026',
+        sections: [
+          { h: '1. Introduction', p: ['This Privacy Policy describes how Quebra-Cabeça ("we", "our" or "app") collects, uses and shares information when you use our app.', 'By using the app, you agree to the practices described in this policy.'] },
+          { h: '2. Data Collected', p: ['We do not collect personally identifiable information. The app does not require registration, login, email or any personal information to function.', 'The only information stored locally on your device is:'], ul: ['Game progress (completed puzzles, coins, achievements)', 'User preferences (language, theme, sound)', 'Game statistics'], p2: 'This data is stored in the device\'s internal storage (SharedPreferences and FlutterSecureStorage) and is never sent to our servers.' },
+          { h: '3. Ads (Google AdMob)', p: ['This app displays ads provided by Google AdMob. AdMob may collect and use information to display personalized or non-personalized ads, including:'], ul: ['Android Advertising ID (AAID)', 'IP address', 'App usage data', 'Device type and OS version'], p2: 'You can opt out of personalized ads by adjusting your Android device\'s ad settings in Settings → Google → Ads or through AdMob privacy settings.' },
+          { h: '4. Third-Party Services', p: ['The app uses the following third-party services:'], ul: ['Google AdMob — ad display'] },
+          { h: '5. Device Permissions', p: ['The app may request the following permissions:'], ul: ['Internet — required to load ads and backup features', 'Notifications — for daily puzzle reminder (optional, configurable)'] },
+          { h: '6. Data Security', p: ['Data stored locally on the device is protected by the Android operating system. We do not transmit, sell or share your data with third parties, except as necessary for the ad services described above.'] },
+          { h: '7. User Rights', p: ['You have the right to:'], ul: ['Access — request information about stored data', 'Delete — uninstall the app to remove all local data', 'Opt-out of personalized ads — as described in section 3'] },
+          { h: '8. Children', p: ['The app is suitable for all ages, including children. We do not intentionally collect personal data from children. Ads may be set to non-personalized to comply with COPPA, at the developer\'s discretion in the AdMob console.'] },
+          { h: '9. Changes to This Policy', p: ['We may update this Privacy Policy periodically. We recommend reviewing this page regularly. Significant changes will be notified through the app.'] },
+          { h: '10. Contact', p: ['If you have questions about this Privacy Policy, please contact us at:<br><a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>'] },
+        ],
+      },
+      es: {
+        title: 'Política de Privacidad',
+        subtitle: 'Quebra-Cabeça — Jigsaw Puzzle',
+        date: 'Última actualización: 4 de julio de 2026',
+        sections: [
+          { h: '1. Introducción', p: ['Esta Política de Privacidad describe cómo Quebra-Cabeça recopila, usa y comparte información cuando usted utiliza nuestra aplicación.', 'Al utilizar la aplicación, usted acepta las prácticas descritas en esta política.'] },
+          { h: '2. Datos Recopilados', p: ['No recopilamos información personal identificable. La aplicación no requiere registro, inicio de sesión, correo electrónico ni ninguna información personal para funcionar.', 'La única información almacenada localmente en su dispositivo es:'], ul: ['Progreso del juego (puzzles completados, monedas, logros)', 'Preferencias del usuario (idioma, tema, sonido)', 'Estadísticas de juego'], p2: 'Estos datos se almacenan en el almacenamiento interno del dispositivo (SharedPreferences y FlutterSecureStorage) y nunca se envían a nuestros servidores.' },
+          { h: '3. Anuncios (Google AdMob)', p: ['Esta aplicación muestra anuncios proporcionados por Google AdMob. AdMob puede recopilar y usar información para mostrar anuncios personalizados o no personalizados, incluyendo:'], ul: ['Identificador de Publicidad de Android (AAID)', 'Dirección IP', 'Datos de uso de la aplicación', 'Tipo de dispositivo y versión del SO'], p2: 'Puede optar por no recibir anuncios personalizados ajustando la configuración de anuncios de su dispositivo Android en Configuración → Google → Anuncios o a través de la configuración de privacidad de AdMob.' },
+          { h: '4. Servicios de Terceros', p: ['La aplicación utiliza los siguientes servicios de terceros:'], ul: ['Google AdMob — visualización de anuncios'] },
+          { h: '5. Permisos del Dispositivo', p: ['La aplicación puede solicitar los siguientes permisos:'], ul: ['Internet — necesario para cargar anuncios y funciones de respaldo', 'Notificaciones — para recordatorio del puzzle diario (opcional, configurable)'] },
+          { h: '6. Seguridad de los Datos', p: ['Los datos almacenados localmente en el dispositivo están protegidos por el sistema operativo Android. No transmitimos, vendemos ni compartimos sus datos con terceros, excepto según sea necesario para los servicios de anuncios descritos anteriormente.'] },
+          { h: '7. Derechos del Usuario', p: ['Usted tiene derecho a:'], ul: ['Acceder — solicitar información sobre los datos almacenados', 'Eliminar — desinstalar la aplicación para eliminar todos los datos locales', 'Excluirse de anuncios personalizados — como se describe en la sección 3'] },
+          { h: '8. Niños', p: ['La aplicación es adecuada para todas las edades, incluidos niños. No recopilamos intencionalmente datos personales de niños. Los anuncios pueden configurarse como no personalizados para cumplir con COPPA, a discreción del desarrollador en la consola de AdMob.'] },
+          { h: '9. Cambios en esta Política', p: ['Podemos actualizar esta Política de Privacidad periódicamente. Recomendamos revisar esta página regularmente. Los cambios significativos se notificarán a través de la aplicación.'] },
+          { h: '10. Contacto', p: ['Si tiene preguntas sobre esta Política de Privacidad, contáctenos por correo electrónico:<br><a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>'] },
+        ],
+      },
+      fr: {
+        title: 'Politique de Confidentialité',
+        subtitle: 'Quebra-Cabeça — Jigsaw Puzzle',
+        date: 'Dernière mise à jour : 4 juillet 2026',
+        sections: [
+          { h: '1. Introduction', p: ['Cette Politique de Confidentialité décrit comment Quebra-Cabeça collecte, utilise et partage les informations lorsque vous utilisez notre application.', 'En utilisant l\'application, vous acceptez les pratiques décrites dans cette politique.'] },
+          { h: '2. Données Collectées', p: ['Nous ne collectons pas de données personnelles identifiables. L\'application ne nécessite pas d\'inscription, de connexion, d\'e-mail ou d\'informations personnelles pour fonctionner.', 'Les seules informations stockées localement sur votre appareil sont :'], ul: ['Progression du jeu (puzzles terminés, pièces, succès)', 'Préférences utilisateur (langue, thème, son)', 'Statistiques de jeu'], p2: 'Ces données sont stockées dans la mémoire interne de l\'appareil (SharedPreferences et FlutterSecureStorage) et ne sont jamais envoyées à nos serveurs.' },
+          { h: '3. Publicités (Google AdMob)', p: ['Cette application affiche des publicités fournies par Google AdMob. AdMob peut collecter et utiliser des informations pour afficher des publicités personnalisées ou non personnalisées, notamment :'], ul: ['Identifiant publicitaire Android (AAID)', 'Adresse IP', 'Données d\'utilisation de l\'application', 'Type d\'appareil et version du système'], p2: 'Vous pouvez refuser les publicités personnalisées en ajustant les paramètres publicitaires de votre appareil Android dans Paramètres → Google → Annonces ou via les paramètres de confidentialité d\'AdMob.' },
+          { h: '4. Services Tiers', p: ['L\'application utilise les services tiers suivants :'], ul: ['Google AdMob — affichage de publicités'] },
+          { h: '5. Permissions de l\'Appareil', p: ['L\'application peut demander les autorisations suivantes :'], ul: ['Internet — nécessaire pour charger les publicités et les fonctions de sauvegarde', 'Notifications — pour le rappel du puzzle quotidien (optionnel, configurable)'] },
+          { h: '6. Sécurité des Données', p: ['Les données stockées localement sur l\'appareil sont protégées par le système d\'exploitation Android. Nous ne transmettons, ne vendons ni ne partageons vos données avec des tiers, sauf si nécessaire pour les services publicitaires décrits ci-dessus.'] },
+          { h: '7. Droits de l\'Utilisateur', p: ['Vous avez le droit de :'], ul: ['Accéder — demander des informations sur les données stockées', 'Supprimer — désinstaller l\'application pour supprimer toutes les données locales', 'Refuser les publicités personnalisées — comme décrit à la section 3'] },
+          { h: '8. Enfants', p: ['L\'application convient à tous les âges, y compris les enfants. Nous ne collectons pas intentionnellement de données personnelles d\'enfants. Les publicités peuvent être configurées comme non personnalisées pour se conformer à la COPPA, à la discrétion du développeur dans la console AdMob.'] },
+          { h: '9. Modifications de cette Politique', p: ['Nous pouvons mettre à jour cette Politique de Confidentialité périodiquement. Nous vous recommandons de consulter régulièrement cette page. Les modifications importantes seront notifiées via l\'application.'] },
+          { h: '10. Contact', p: ['Si vous avez des questions concernant cette Politique de Confidentialité, contactez-nous par e-mail :<br><a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>'] },
+        ],
+      },
+      de: {
+        title: 'Datenschutzerklärung',
+        subtitle: 'Quebra-Cabeça — Jigsaw Puzzle',
+        date: 'Zuletzt aktualisiert: 4. Juli 2026',
+        sections: [
+          { h: '1. Einleitung', p: ['Diese Datenschutzerklärung beschreibt, wie Quebra-Cabeça Informationen sammelt, verwendet und weitergibt, wenn Sie unsere App nutzen.', 'Durch die Nutzung der App stimmen Sie den in dieser Erklärung beschriebenen Praktiken zu.'] },
+          { h: '2. Erhobene Daten', p: ['Wir erheben keine personenbezogenen Daten. Die App erfordert keine Registrierung, Anmeldung, E-Mail oder persönliche Informationen.', 'Die einzigen lokal auf Ihrem Gerät gespeicherten Informationen sind:'], ul: ['Spielverlauf (abgeschlossene Puzzles, Münzen, Erfolge)', 'Benutzereinstellungen (Sprache, Design, Ton)', 'Spielstatistiken'], p2: 'Diese Daten werden im internen Speicher des Geräts gespeichert (SharedPreferences und FlutterSecureStorage) und niemals an unsere Server gesendet.' },
+          { h: '3. Werbung (Google AdMob)', p: ['Diese App zeigt Werbung von Google AdMob an. AdMob kann Informationen sammeln und verwenden, um personalisierte oder nicht personalisierte Werbung anzuzeigen, einschließlich:'], ul: ['Android-Werbe-ID (AAID)', 'IP-Adresse', 'Nutzungsdaten der App', 'Gerätetyp und Betriebssystemversion'], p2: 'Sie können personalisierte Werbung ablehnen, indem Sie die Werbeeinstellungen Ihres Android-Geräts unter Einstellungen → Google → Werbung oder über die Datenschutzeinstellungen von AdMob anpassen.' },
+          { h: '4. Dienste Dritter', p: ['Die App nutzt folgende Dienste Dritter:'], ul: ['Google AdMob — Werbeanzeige'] },
+          { h: '5. Geräteberechtigungen', p: ['Die App kann folgende Berechtigungen anfordern:'], ul: ['Internet — erforderlich zum Laden von Werbung und Backup-Funktionen', 'Benachrichtigungen — für tägliche Puzzle-Erinnerung (optional, konfigurierbar)'] },
+          { h: '6. Datensicherheit', p: ['Lokal auf dem Gerät gespeicherte Daten werden durch das Android-Betriebssystem geschützt. Wir übertragen, verkaufen oder teilen Ihre Daten nicht mit Dritten, außer wie für die oben beschriebenen Werbedienste erforderlich.'] },
+          { h: '7. Benutzerrechte', p: ['Sie haben das Recht:'], ul: ['Zugriff — Informationen über gespeicherte Daten anzufordern', 'Löschung — die App zu deinstallieren, um alle lokalen Daten zu entfernen', 'Widerspruch gegen personalisierte Werbung — wie in Abschnitt 3 beschrieben'] },
+          { h: '8. Kinder', p: ['Die App ist für alle Altersgruppen geeignet, einschließlich Kinder. Wir sammeln nicht wissentlich persönliche Daten von Kindern. Werbung kann als nicht personalisiert eingestellt werden, um COPPA zu entsprechen, nach Ermessen des Entwicklers in der AdMob-Konsole.'] },
+          { h: '9. Änderungen dieser Richtlinie', p: ['Wir können diese Datenschutzerklärung regelmäßig aktualisieren. Wir empfehlen, diese Seite regelmäßig zu überprüfen. Wesentliche Änderungen werden über die App mitgeteilt.'] },
+          { h: '10. Kontakt', p: ['Wenn Sie Fragen zu dieser Datenschutzerklärung haben, kontaktieren Sie uns per E-Mail:<br><a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>'] },
+        ],
+      },
+      it: {
+        title: 'Informativa sulla Privacy',
+        subtitle: 'Quebra-Cabeça — Jigsaw Puzzle',
+        date: 'Ultimo aggiornamento: 4 luglio 2026',
+        sections: [
+          { h: '1. Introduzione', p: ['Questa Informativa sulla Privacy descrive come Quebra-Cabeça raccoglie, utilizza e condivide le informazioni quando utilizzi la nostra app.', 'Utilizzando l\'app, accetti le pratiche descritte in questa informativa.'] },
+          { h: '2. Dati Raccolti', p: ['Non raccogliamo dati personali identificabili. L\'app non richiede registrazione, login, email o informazioni personali per funzionare.', 'Le uniche informazioni memorizzate localmente sul tuo dispositivo sono:'], ul: ['Avanzamento del gioco (puzzle completati, monete, risultati)', 'Preferenze utente (lingua, tema, suono)', 'Statistiche di gioco'], p2: 'Questi dati sono memorizzati nella memoria interna del dispositivo (SharedPreferences e FlutterSecureStorage) e non vengono mai inviati ai nostri server.' },
+          { h: '3. Annunci (Google AdMob)', p: ['Questa app mostra annunci forniti da Google AdMob. AdMob può raccogliere e utilizzare informazioni per mostrare annunci personalizzati o non personalizzati, inclusi:'], ul: ['ID pubblicitario Android (AAID)', 'Indirizzo IP', 'Dati di utilizzo dell\'app', 'Tipo di dispositivo e versione del sistema operativo'], p2: 'Puoi disattivare gli annunci personalizzati regolando le impostazioni pubblicitarie del tuo dispositivo Android in Impostazioni → Google → Annunci o tramite le impostazioni sulla privacy di AdMob.' },
+          { h: '4. Servizi di Terze Parti', p: ['L\'app utilizza i seguenti servizi di terze parti:'], ul: ['Google AdMob — visualizzazione annunci'] },
+          { h: '5. Permessi del Dispositivo', p: ['L\'app può richiedere i seguenti permessi:'], ul: ['Internet — necessario per caricare annunci e funzioni di backup', 'Notifiche — per il promemoria del puzzle quotidiano (opzionale, configurabile)'] },
+          { h: '6. Sicurezza dei Dati', p: ['I dati memorizzati localmente sul dispositivo sono protetti dal sistema operativo Android. Non trasmettiamo, vendiamo o condividiamo i tuoi dati con terze parti, se non necessario per i servizi pubblicitari sopra descritti.'] },
+          { h: '7. Diritti dell\'Utente', p: ['Hai il diritto di:'], ul: ['Accedere — richiedere informazioni sui dati memorizzati', 'Eliminare — disinstallare l\'app per rimuovere tutti i dati locali', 'Rifiutare gli annunci personalizzati — come descritto nella sezione 3'] },
+          { h: '8. Bambini', p: ['L\'app è adatta a tutte le età, inclusi i bambini. Non raccogliamo intenzionalmente dati personali di bambini. Gli annunci possono essere impostati come non personalizzati per conformarsi alla COPPA, a discrezione dello sviluppatore nella console AdMob.'] },
+          { h: '9. Modifiche a questa Informativa', p: ['Possiamo aggiornare periodicamente questa Informativa sulla Privacy. Ti consigliamo di rivedere regolarmente questa pagina. Le modifiche significative saranno notificate tramite l\'app.'] },
+          { h: '10. Contatto', p: ['Se hai domande su questa Informativa sulla Privacy, contattaci via email:<br><a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>'] },
+        ],
+      },
+      ja: {
+        title: 'プライバシーポリシー',
+        subtitle: 'Quebra-Cabeça — ジグソーパズル',
+        date: '最終更新日: 2026年7月4日',
+        sections: [
+          { h: '1. はじめに', p: ['このプライバシーポリシーは、Quebra-Cabeçaがお客様の情報をどのように収集、使用、共有するかを説明しています。', 'アプリを使用することにより、お客様はこのポリシーに記載された慣行に同意したものとみなされます。'] },
+          { h: '2. 収集するデータ', p: ['個人を特定できる情報は収集しません。アプリの使用に登録、ログイン、メール、個人情報は必要ありません。', 'デバイスにローカルに保存される唯一の情報は次のとおりです：'], ul: ['ゲームの進行状況（完了したパズル、コイン、実績）', 'ユーザー設定（言語、テーマ、サウンド）', 'ゲーム統計'], p2: 'このデータはデバイスの内部ストレージ（SharedPreferences および FlutterSecureStorage）に保存され、当社のサーバーに送信されることはありません。' },
+          { h: '3. 広告（Google AdMob）', p: ['このアプリはGoogle AdMobが提供する広告を表示します。AdMobは、パーソナライズ広告または非パーソナライズ広告を表示するために情報を収集および使用する場合があります。以下を含みます：'], ul: ['Android広告ID（AAID）', 'IPアドレス', 'アプリ使用データ', 'デバイスの種類とOSバージョン'], p2: 'Androidデバイスの広告設定（設定 → Google → 広告）またはAdMobのプライバシー設定で、パーソナライズ広告をオプトアウトできます。' },
+          { h: '4. サードパーティサービス', p: ['アプリは次のサードパーティサービスを使用します：'], ul: ['Google AdMob — 広告表示'] },
+          { h: '5. デバイス権限', p: ['アプリは次の権限を要求する場合があります：'], ul: ['インターネット — 広告とバックアップ機能の読み込みに必要', '通知 — デイリーパズルのリマインダー（オプション、設定可能）'] },
+          { h: '6. データセキュリティ', p: ['デバイスにローカル保存されたデータは、Androidオペレーティングシステムによって保護されています。上記の広告サービスに必要な場合を除き、お客様のデータを第三者に送信、販売、共有することはありません。'] },
+          { h: '7. ユーザーの権利', p: ['お客様には以下の権利があります：'], ul: ['アクセス — 保存されたデータに関する情報を請求', '削除 — アプリをアンインストールしてすべてのローカルデータを削除', 'パーソナライズ広告の拒否 — セクション3で説明'] },
+          { h: '8. 子供', p: ['アプリは子供を含むすべての年齢層に適しています。子供から意図的に個人データを収集することはありません。広告は、AdMobコンソールでの開発者の裁量により、COPPAに準拠するために非パーソナライズに設定できます。'] },
+          { h: '9. このポリシーの変更', p: ['このプライバシーポリシーは随時更新される場合があります。定期的にこのページをご確認ください。重要な変更はアプリを通じて通知されます。'] },
+          { h: '10. お問い合わせ', p: ['このプライバシーポリシーに関するご質問は、メールでお問い合わせください：<br><a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>'] },
+        ],
+      },
+      ko: {
+        title: '개인정보 처리방침',
+        subtitle: 'Quebra-Cabeça — 직소 퍼즐',
+        date: '최종 업데이트: 2026년 7월 4일',
+        sections: [
+          { h: '1. 소개', p: ['본 개인정보 처리방침은 Quebra-Cabeça가 귀하가 당사 앱을 사용할 때 정보를 수집, 사용 및 공유하는 방법을 설명합니다.', '앱을 사용함으로써 귀하는 본 방침에 설명된 관행에 동의하는 것으로 간주됩니다.'] },
+          { h: '2. 수집하는 데이터', p: ['당사는 개인 식별 정보를 수집하지 않습니다. 앱 사용을 위해 등록, 로그인, 이메일 또는 개인 정보가 필요하지 않습니다.', '귀하의 기기에 로컬로 저장되는 유일한 정보는 다음과 같습니다:'], ul: ['게임 진행 상황(완료된 퍼즐, 코인, 업적)', '사용자 기본 설정(언어, 테마, 사운드)', '게임 통계'], p2: '이 데이터는 기기의 내부 저장소(SharedPreferences 및 FlutterSecureStorage)에 저장되며 당사 서버로 전송되지 않습니다.' },
+          { h: '3. 광고(Google AdMob)', p: ['이 앱은 Google AdMob에서 제공하는 광고를 표시합니다. AdMob은 개인 맞춤형 또는 비개인 맞춤형 광고를 표시하기 위해 정보를 수집 및 사용할 수 있으며, 여기에는 다음이 포함됩니다:'], ul: ['Android 광고 ID(AAID)', 'IP 주소', '앱 사용 데이터', '기기 유형 및 OS 버전'], p2: 'Android 기기의 광고 설정(설정 → Google → 광고) 또는 AdMob 개인정보 보호 설정에서 개인 맞춤형 광고를 거부할 수 있습니다.' },
+          { h: '4. 제3자 서비스', p: ['앱은 다음 제3자 서비스를 사용합니다:'], ul: ['Google AdMob — 광고 표시'] },
+          { h: '5. 기기 권한', p: ['앱은 다음 권한을 요청할 수 있습니다:'], ul: ['인터넷 — 광고 및 백업 기능 로드에 필요', '알림 — 일일 퍼즐 알림(선택 사항, 설정 가능)'] },
+          { h: '6. 데이터 보안', p: ['기기에 로컬로 저장된 데이터는 Android 운영 체제에 의해 보호됩니다. 위에서 설명한 광고 서비스에 필요한 경우를 제외하고 당사는 귀하의 데이터를 제3자에게 전송, 판매 또는 공유하지 않습니다.'] },
+          { h: '7. 사용자 권리', p: ['귀하는 다음과 같은 권리가 있습니다:'], ul: ['접근 — 저장된 데이터에 대한 정보 요청', '삭제 — 앱을 제거하여 모든 로컬 데이터 삭제', '개인 맞춤형 광고 거부 — 섹션 3에 설명된 대로'] },
+          { h: '8. 아동', p: ['앱은 아동을 포함한 모든 연령대에 적합합니다. 당사는 아동으로부터 의도적으로 개인 데이터를 수집하지 않습니다. 광고는 개발자의 재량에 따라 AdMob 콘솔에서 COPPA를 준수하기 위해 비개인 맞춤형으로 설정할 수 있습니다.'] },
+          { h: '9. 본 방침의 변경', p: ['당사는 이 개인정보 처리방침을 수시로 업데이트할 수 있습니다. 정기적으로 이 페이지를 검토하시기 바랍니다. 중요한 변경 사항은 앱을 통해 알려드립니다.'] },
+          { h: '10. 연락처', p: ['본 개인정보 처리방침에 관한 문의 사항이 있으시면 이메일로 연락해 주십시오:<br><a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>'] },
+        ],
+      },
+      zh: {
+        title: '隐私政策',
+        subtitle: 'Quebra-Cabeça — 拼图游戏',
+        date: '最后更新：2026年7月4日',
+        sections: [
+          { h: '1. 引言', p: ['本隐私政策描述了Quebra-Cabeça在您使用我们的应用程序时如何收集、使用和分享信息。', '使用本应用程序即表示您同意本政策中描述的惯例。'] },
+          { h: '2. 收集的数据', p: ['我们不会收集个人身份信息。应用程序无需注册、登录、电子邮件或任何个人信息即可运行。', '仅存储在您设备本地的信息是：'], ul: ['游戏进度（已完成的拼图、金币、成就）', '用户偏好（语言、主题、声音）', '游戏统计数据'], p2: '这些数据存储在设备的内部存储（SharedPreferences 和 FlutterSecureStorage）中，绝不会发送到我们的服务器。' },
+          { h: '3. 广告（Google AdMob）', p: ['本应用显示由Google AdMob提供的广告。AdMob可能会收集和使用信息以显示个性化或非个性化广告，包括：'], ul: ['Android广告标识符（AAID）', 'IP地址', '应用使用数据', '设备类型和操作系统版本'], p2: '您可以通过调整Android设备的广告设置（设置 → Google → 广告）或通过AdMob隐私设置来选择退出个性化广告。' },
+          { h: '4. 第三方服务', p: ['应用程序使用以下第三方服务：'], ul: ['Google AdMob — 广告展示'] },
+          { h: '5. 设备权限', p: ['应用程序可能请求以下权限：'], ul: ['互联网 — 加载广告和备份功能所需', '通知 — 用于每日拼图提醒（可选，可配置）'] },
+          { h: '6. 数据安全', p: ['存储在设备本地的数据受Android操作系统的保护。除非上述广告服务所需，否则我们不会传输、出售或与第三方共享您的数据。'] },
+          { h: '7. 用户权利', p: ['您有权：'], ul: ['访问 — 请求有关已存储数据的信息', '删除 — 卸载应用程序以删除所有本地数据', '退出个性化广告 — 如第3节所述'] },
+          { h: '8. 儿童', p: ['本应用适合所有年龄段，包括儿童。我们不会故意收集儿童的个人数据。广告可以设置为非个性化以符合COPPA，由开发人员在AdMob控制台中自行决定。'] },
+          { h: '9. 本政策的变更', p: ['我们可能会定期更新本隐私政策。建议您定期查看此页面。重大变更将通过应用程序通知。'] },
+          { h: '10. 联系方式', p: ['如果您对本隐私政策有疑问，请通过电子邮件联系我们：<br><a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>'] },
+        ],
+      },
+    };
 
-  <h2>2. Dados Coletados</h2>
-  <p>
-    <strong>Não coletamos dados pessoais identificáveis.</strong>
-    O aplicativo não requer cadastro, login, e-mail ou qualquer
-    informação pessoal para funcionar.
-  </p>
-  <p>
-    As únicas informações armazenadas localmente no seu dispositivo
-    são:
-  </p>
-  <ul>
-    <li>Progresso do jogo (puzzles concluídos, moedas, conquistas)</li>
-    <li>Preferências do usuário (idioma, tema, som)</li>
-    <li>Estatísticas de jogo</li>
-  </ul>
-  <p>
-    Esses dados são armazenados no armazenamento interno do
-    dispositivo (<em>SharedPreferences</em> e
-    <em>FlutterSecureStorage</em>) e nunca são enviados para nossos
-    servidores.
-  </p>
+    function render(lang) {
+      const data = t[lang];
+      if (!data) return;
+      let html = '<h1>' + data.title + '</h1>';
+      html += '<p><strong>' + data.subtitle + '</strong></p>';
+      html += '<p class="date">' + data.date + '</p>';
+      for (const s of data.sections) {
+        html += '<h2>' + s.h + '</h2>';
+        for (const p of (s.p || [])) html += '<p>' + p + '</p>';
+        if (s.ul) { html += '<ul>'; for (const li of s.ul) html += '<li>' + li + '</li>'; html += '</ul>'; }
+        if (s.p2) html += '<p>' + s.p2 + '</p>';
+      }
+      document.getElementById('content').innerHTML = html;
+      document.title = data.title + ' — Quebra-Cabeça';
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+    }
 
-  <h2>3. Anúncios (Google AdMob)</h2>
-  <p>
-    Este aplicativo exibe anúncios fornecidos pelo
-    <strong>Google AdMob</strong>. O AdMob pode coletar e usar
-    informações para exibir anúncios personalizados ou não
-    personalizados, incluindo:
-  </p>
-  <ul>
-    <li>Identificador de Publicidade do Android (AAID)</li>
-    <li>Endereço IP</li>
-    <li>Dados de uso do aplicativo</li>
-    <li>Tipo de dispositivo e versão do sistema operacional</li>
-  </ul>
-  <p>
-    Você pode optar por não receber anúncios personalizados
-    ajustando as configurações de anúncios do seu dispositivo
-    Android em <em>Configurações → Google → Anúncios</em> ou
-    através das configurações de privacidade do AdMob.
-  </p>
-  <p>
-    Para mais informações sobre como o Google coleta e usa dados,
-    consulte a
-    <a href="https://policies.google.com/privacy" target="_blank">
-      Política de Privacidade do Google
-    </a>
-    e os
-    <a href="https://support.google.com/admob/answer/6128543" target="_blank">
-      Termos de Consentimento do Usuário da EEE do Google
-    </a>.
-  </p>
-
-  <h2>4. Serviços de Terceiros</h2>
-  <p>O aplicativo utiliza os seguintes serviços de terceiros:</p>
-  <ul>
-    <li><strong>Google AdMob</strong> — exibição de anúncios</li>
-  </ul>
-
-  <h2>6. Permissões do Dispositivo</h2>
-  <p>O aplicativo pode solicitar as seguintes permissões:</p>
-  <ul>
-    <li>
-      <strong>Internet</strong> — necessária para carregar anúncios
-      e funcionalidades de backup
-    </li>
-    <li>
-      <strong>Notificações</strong> — para lembrete do puzzle
-      diário (opcional, configurável)
-    </li>
-  </ul>
-
-  <h2>7. Segurança dos Dados</h2>
-  <p>
-    Os dados armazenados localmente no dispositivo são protegidos
-    pelo sistema operacional Android. Não
-    transmitimos, vendemos ou compartilhamos seus dados com
-    terceiros, exceto conforme necessário para os serviços de
-    anúncios descritos acima.
-  </p>
-
-  <h2>8. Direitos do Usuário</h2>
-  <p>Você tem o direito de:</p>
-  <ul>
-    <li>
-      <strong>Acessar</strong> — solicitar informações sobre os
-      dados armazenados
-    </li>
-    <li>
-      <strong>Excluir</strong> — desinstalar o aplicativo para
-      remover todos os dados locais
-    </li>
-    <li>
-      <strong>Opt-out de anúncios personalizados</strong> —
-      conforme descrito na seção 3
-    </li>
-  </ul>
-
-  <h2>9. Crianças</h2>
-  <p>
-    O aplicativo é adequado para todas as idades, incluindo
-    crianças. Não coletamos intencionalmente dados pessoais de
-    crianças. Os anúncios exibidos podem ser configurados como
-    não personalizados para cumprir com a COPPA, a critério do
-    desenvolvedor no console do AdMob.
-  </p>
-
-  <h2>10. Alterações nesta Política</h2>
-  <p>
-    Podemos atualizar esta Política de Privacidade periodicamente.
-    Recomendamos revisar esta página regularmente. Alterações
-    significativas serão notificadas através do aplicativo.
-  </p>
-
-  <h2>11. Contato</h2>
-  <p>
-    Se você tiver dúvidas sobre esta Política de Privacidade,
-    entre em contato pelo e-mail:
-    <br>
-    <a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>
-  </p>
-
-  <hr>
-
-  <p style="text-align:center;color:#666;font-size:0.9em;">
-    Quebra-Cabeça — Jigsaw Puzzle &copy; 2026
-  </p>
+    const sel = document.getElementById('langSelect');
+    const saved = localStorage.getItem('privacy_lang');
+    if (saved && langs.includes(saved)) sel.value = saved;
+    render(sel.value);
+    sel.addEventListener('change', function() {
+      localStorage.setItem('privacy_lang', this.value);
+      render(this.value);
+    });
+  </script>
 </body>
 </html>
