@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Termos de Uso — Quebra-Cabeça</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7; color: #1a1a2e; background: #f8f9fc; padding: 20px;
+    }
+    .container { max-width: 800px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 40px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .lang-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+    .lang-bar label { font-size: 13px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; }
+    .lang-bar select {
+      padding: 6px 12px; border-radius: 8px; border: 1px solid #ddd;
+      font-size: 14px; background: #fff; color: #333; cursor: pointer;
+    }
+    .lang-bar select:focus { outline: none; border-color: #6750A4; }
+    h1 { font-size: 28px; color: #6750A4; margin-bottom: 8px; }
+    .date { color: #888; font-size: 14px; margin-bottom: 32px; }
+    h2 { font-size: 18px; color: #6750A4; margin: 28px 0 12px; }
+    p { margin-bottom: 14px; color: #333; }
+    ul { margin: 10px 0 14px 24px; }
+    li { margin-bottom: 8px; color: #333; }
+    strong { color: #1a1a2e; }
+    a { color: #6750A4; }
+    .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; font-size: 13px; color: #888; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="lang-bar">
+      <label for="langSelect">Idioma / Language / 语言</label>
+      <select id="langSelect">
+        <option value="pt">Português</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+        <option value="it">Italiano</option>
+        <option value="ja">日本語</option>
+        <option value="ko">한국어</option>
+        <option value="zh">中文</option>
+      </select>
+    </div>
+    <div id="content"></div>
+    <div class="footer">
+      &copy; 2026 RCSB Info. Todos os direitos reservados.
+    </div>
+  </div>
+
+  <script>
+    const langs = ['pt', 'en', 'es', 'fr', 'de', 'it', 'ja', 'ko', 'zh'];
+
+    const t = {
+      pt: {
+        title: 'Termos de Uso',
+        subtitle: 'Quebra-Cabeça — Jigsaw Puzzle',
+        date: 'Última atualização: 4 de julho de 2026',
+        intro: 'Ao baixar ou utilizar o aplicativo <strong>Quebra-Cabeça</strong>, você concorda com os termos e condições descritos abaixo. Se não concordar, não utilize o aplicativo.',
+        sections: [
+          { h: '1. Licença de Uso', p: 'Concedemos a você uma licença limitada, não exclusiva, intransferível e revogável para utilizar o aplicativo em seu dispositivo pessoal para fins de entretenimento. Você não pode copiar, modificar, distribuir, vender ou fazer engenharia reversa do aplicativo.' },
+          { h: '2. Propriedade Intelectual', p: 'Todos os direitos, títulos e interesses relativos ao aplicativo, incluindo código-fonte, design, logotipos, imagens e marcas, pertencem ao desenvolvedor. As imagens utilizadas nos puzzles são licenciadas ou de domínio público. Nenhum conteúdo pode ser reproduzido sem autorização prévia por escrito.' },
+          { h: '3. Publicidade', p: 'O aplicativo exibe anúncios fornecidos pelo Google AdMob. Estes anúncios podem ser personalizados com base em seus interesses, conforme descrito em nossa <a href="https://jcbarcelos.github.io/">Política de Privacidade</a>. Você pode optar por limitar a personalização de anúncios nas configurações do seu dispositivo.' },
+          { h: '4. Compras no Aplicativo', p: 'O aplicativo oferece moedas virtuais e desbloqueio de conteúdo mediante anúncios ou compras no aplicativo. Todas as transações são processadas pela loja de aplicativos (Google Play). As moedas virtuais não têm valor monetário real e não são reembolsáveis ou transferíveis.' },
+          { h: '5. Responsabilidades do Usuário', ul: ['Não utilizar o aplicativo para fins ilegais ou não autorizados', 'Não interferir no funcionamento do aplicativo ou servidores', 'Não tentar burlar sistemas de recompensa ou pontuação', 'Respeitar os direitos de propriedade intelectual'] },
+          { h: '6. Limitação de Responsabilidade', p: 'O aplicativo é fornecido "como está", sem garantias de qualquer tipo, expressas ou implícitas. O desenvolvedor não se responsabiliza por danos diretos, indiretos, incidentais ou consequenciais decorrentes do uso ou da impossibilidade de uso do aplicativo.' },
+          { h: '7. Privacidade', p: 'Seus dados são tratados conforme descrito em nossa <a href="https://jcbarcelos.github.io/">Política de Privacidade</a>. Recomendamos a leitura desse documento para entender como coletamos, usamos e protegemos suas informações.' },
+          { h: '8. Alterações nos Termos', p: 'Estes termos podem ser atualizados periodicamente. Notificaremos sobre alterações significativas através do aplicativo ou por e-mail. O uso continuado após as alterações constitui aceitação dos novos termos.' },
+          { h: '9. Legislação Aplicável', p: 'Estes termos são regidos pelas leis brasileiras. Qualquer disputa será resolvida no foro da comarca do Rio de Janeiro, RJ.' },
+          { h: '10. Contato', p: 'Para dúvidas ou solicitações, entre em contato:<br>E-mail: <a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>' },
+        ],
+      },
+      en: {
+        title: 'Terms of Use',
+        subtitle: 'Quebra-Cabeça — Jigsaw Puzzle',
+        date: 'Last updated: July 4, 2026',
+        intro: 'By downloading or using the <strong>Quebra-Cabeça</strong> app, you agree to the terms and conditions described below. If you do not agree, do not use the app.',
+        sections: [
+          { h: '1. License', p: 'We grant you a limited, non-exclusive, non-transferable, revocable license to use the app on your personal device for entertainment purposes. You may not copy, modify, distribute, sell or reverse engineer the app.' },
+          { h: '2. Intellectual Property', p: 'All rights, titles and interests in the app, including source code, design, logos, images and trademarks, belong to the developer. Images used in puzzles are licensed or public domain. No content may be reproduced without prior written permission.' },
+          { h: '3. Advertising', p: 'The app displays ads provided by Google AdMob. These ads may be personalized based on your interests, as described in our <a href="https://jcbarcelos.github.io/">Privacy Policy</a>. You may limit ad personalization in your device settings.' },
+          { h: '4. In-App Purchases', p: 'The app offers virtual coins and content unlock through ads or in-app purchases. All transactions are processed by the app store (Google Play). Virtual coins have no real monetary value and are non-refundable or non-transferable.' },
+          { h: '5. User Responsibilities', ul: ['Do not use the app for illegal or unauthorized purposes', 'Do not interfere with the app or servers', 'Do not attempt to cheat reward or scoring systems', 'Respect intellectual property rights'] },
+          { h: '6. Limitation of Liability', p: 'The app is provided "as is", without warranties of any kind, express or implied. The developer is not liable for any direct, indirect, incidental or consequential damages arising from the use or inability to use the app.' },
+          { h: '7. Privacy', p: 'Your data is treated as described in our <a href="https://jcbarcelos.github.io/">Privacy Policy</a>. We recommend reading that document to understand how we collect, use and protect your information.' },
+          { h: '8. Changes to Terms', p: 'These terms may be updated periodically. We will notify significant changes through the app or by email. Continued use after changes constitutes acceptance of the new terms.' },
+          { h: '9. Governing Law', p: 'These terms are governed by Brazilian law. Any disputes will be resolved in the court of Rio de Janeiro, RJ.' },
+          { h: '10. Contact', p: 'For questions or requests, contact us at:<br>Email: <a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>' },
+        ],
+      },
+      es: {
+        title: 'Términos de Uso',
+        subtitle: 'Quebra-Cabeça — Jigsaw Puzzle',
+        date: 'Última actualización: 4 de julio de 2026',
+        intro: 'Al descargar o utilizar la aplicación <strong>Quebra-Cabeça</strong>, usted acepta los términos y condiciones descritos a continuación. Si no está de acuerdo, no utilice la aplicación.',
+        sections: [
+          { h: '1. Licencia de Uso', p: 'Le otorgamos una licencia limitada, no exclusiva, intransferible y revocable para utilizar la aplicación en su dispositivo personal con fines de entretenimiento. No puede copiar, modificar, distribuir, vender ni realizar ingeniería inversa de la aplicación.' },
+          { h: '2. Propiedad Intelectual', p: 'Todos los derechos, títulos e intereses relacionados con la aplicación, incluido el código fuente, diseño, logotipos, imágenes y marcas, pertenecen al desarrollador. Las imágenes utilizadas en los puzzles tienen licencia o son de dominio público. Ningún contenido puede reproducirse sin autorización previa por escrito.' },
+          { h: '3. Publicidad', p: 'La aplicación muestra anuncios proporcionados por Google AdMob. Estos anuncios pueden personalizarse según sus intereses, como se describe en nuestra <a href="https://jcbarcelos.github.io/">Política de Privacidad</a>. Puede limitar la personalización de anuncios en la configuración de su dispositivo.' },
+          { h: '4. Compras en la Aplicación', p: 'La aplicación ofrece monedas virtuales y desbloqueo de contenido mediante anuncios o compras en la aplicación. Todas las transacciones son procesadas por la tienda de aplicaciones (Google Play). Las monedas virtuales no tienen valor monetario real y no son reembolsables ni transferibles.' },
+          { h: '5. Responsabilidades del Usuario', ul: ['No utilizar la aplicación para fines ilegales o no autorizados', 'No interferir con el funcionamiento de la aplicación o servidores', 'No intentar burlar los sistemas de recompensa o puntuación', 'Respetar los derechos de propiedad intelectual'] },
+          { h: '6. Limitación de Responsabilidad', p: 'La aplicación se proporciona "tal cual", sin garantías de ningún tipo, expresas o implícitas. El desarrollador no es responsable por daños directos, indirectos, incidentales o consecuentes derivados del uso o la imposibilidad de uso de la aplicación.' },
+          { h: '7. Privacidad', p: 'Sus datos se tratan según lo descrito en nuestra <a href="https://jcbarcelos.github.io/">Política de Privacidad</a>. Recomendamos leer ese documento para entender cómo recopilamos, usamos y protegemos su información.' },
+          { h: '8. Cambios en los Términos', p: 'Estos términos pueden actualizarse periódicamente. Notificaremos cambios significativos a través de la aplicación o por correo electrónico. El uso continuado después de los cambios constituye la aceptación de los nuevos términos.' },
+          { h: '9. Legislación Aplicable', p: 'Estos términos se rigen por las leyes brasileñas. Cualquier disputa se resolverá en el tribunal de la ciudad de Río de Janeiro, RJ.' },
+          { h: '10. Contacto', p: 'Para preguntas o solicitudes, contáctenos:<br>Correo electrónico: <a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>' },
+        ],
+      },
+      fr: {
+        title: "Conditions d'Utilisation",
+        subtitle: 'Quebra-Cabeça — Jigsaw Puzzle',
+        date: 'Dernière mise à jour : 4 juillet 2026',
+        intro: 'En téléchargeant ou en utilisant l\'application <strong>Quebra-Cabeça</strong>, vous acceptez les termes et conditions décrits ci-dessous. Si vous n\'êtes pas d\'accord, n\'utilisez pas l\'application.',
+        sections: [
+          { h: '1. Licence d\'Utilisation', p: 'Nous vous accordons une licence limitée, non exclusive, non transférable et révocable pour utiliser l\'application sur votre appareil personnel à des fins de divertissement. Vous ne pouvez pas copier, modifier, distribuer, vendre ou décompiler l\'application.' },
+          { h: '2. Propriété Intellectuelle', p: 'Tous les droits, titres et intérêts relatifs à l\'application, y compris le code source, le design, les logos, les images et les marques, appartiennent au développeur. Les images utilisées dans les puzzles sont sous licence ou dans le domaine public. Aucun contenu ne peut être reproduit sans autorisation écrite préalable.' },
+          { h: '3. Publicité', p: 'L\'application affiche des publicités fournies par Google AdMob. Ces publicités peuvent être personnalisées en fonction de vos intérêts, comme décrit dans notre <a href="https://jcbarcelos.github.io/">Politique de Confidentialité</a>. Vous pouvez limiter la personnalisation des publicités dans les paramètres de votre appareil.' },
+          { h: '4. Achats Intégrés', p: 'L\'application propose des pièces virtuelles et du déblocage de contenu via des publicités ou des achats intégrés. Toutes les transactions sont traitées par la boutique d\'applications (Google Play). Les pièces virtuelles n\'ont aucune valeur monétaire réelle et ne sont ni remboursables ni transférables.' },
+          { h: '5. Responsabilités de l\'Utilisateur', ul: ['Ne pas utiliser l\'application à des fins illégales ou non autorisées', 'Ne pas interférer avec le fonctionnement de l\'application ou des serveurs', 'Ne pas tenter de contourner les systèmes de récompense ou de score', 'Respecter les droits de propriété intellectuelle'] },
+          { h: '6. Limitation de Responsabilité', p: 'L\'application est fournie "telle quelle", sans garanties d\'aucune sorte, expresses ou implicites. Le développeur n\'est pas responsable des dommages directs, indirects, accessoires ou consécutifs découlant de l\'utilisation ou de l\'impossibilité d\'utiliser l\'application.' },
+          { h: '7. Confidentialité', p: 'Vos données sont traitées comme décrit dans notre <a href="https://jcbarcelos.github.io/">Politique de Confidentialité</a>. Nous vous recommandons de lire ce document pour comprendre comment nous collectons, utilisons et protégeons vos informations.' },
+          { h: '8. Modifications des Conditions', p: 'Ces conditions peuvent être mises à jour périodiquement. Nous vous informerons des changements importants via l\'application ou par e-mail. L\'utilisation continue après les modifications constitue une acceptation des nouvelles conditions.' },
+          { h: '9. Loi Applicable', p: 'Ces conditions sont régies par les lois brésiliennes. Tout litige sera résolu devant le tribunal de la ville de Rio de Janeiro, RJ.' },
+          { h: '10. Contact', p: 'Pour toute question ou demande, contactez-nous :<br>E-mail : <a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>' },
+        ],
+      },
+      de: {
+        title: 'Nutzungsbedingungen',
+        subtitle: 'Quebra-Cabeça — Jigsaw Puzzle',
+        date: 'Zuletzt aktualisiert: 4. Juli 2026',
+        intro: 'Durch Herunterladen oder Verwenden der App <strong>Quebra-Cabeça</strong> stimmen Sie den nachstehend beschriebenen Bedingungen zu. Wenn Sie nicht zustimmen, verwenden Sie die App nicht.',
+        sections: [
+          { h: '1. Nutzungslizenz', p: 'Wir gewähren Ihnen eine eingeschränkte, nicht ausschließliche, nicht übertragbare und widerrufliche Lizenz zur Nutzung der App auf Ihrem persönlichen Gerät zu Unterhaltungszwecken. Sie dürfen die App nicht kopieren, modifizieren, verbreiten, verkaufen oder zurückentwickeln.' },
+          { h: '2. Geistiges Eigentum', p: 'Alle Rechte, Titel und Interessen an der App, einschließlich Quellcode, Design, Logos, Bilder und Marken, gehören dem Entwickler. Die in den Puzzles verwendeten Bilder sind lizenziert oder gemeinfrei. Kein Inhalt darf ohne vorherige schriftliche Genehmigung reproduziert werden.' },
+          { h: '3. Werbung', p: 'Die App zeigt Werbung von Google AdMob an. Diese Werbung kann basierend auf Ihren Interessen personalisiert werden, wie in unserer <a href="https://jcbarcelos.github.io/">Datenschutzerklärung</a> beschrieben. Sie können die Personalisierung von Werbung in Ihren Geräteeinstellungen einschränken.' },
+          { h: '4. In-App-Käufe', p: 'Die App bietet virtuelle Münzen und Inhaltsfreischaltung durch Werbung oder In-App-Käufe. Alle Transaktionen werden vom App Store (Google Play) abgewickelt. Virtuelle Münzen haben keinen realen Geldwert und sind nicht erstattungs- oder übertragbar.' },
+          { h: '5. Benutzerpflichten', ul: ['Die App nicht für illegale oder unbefugte Zwecke nutzen', 'Den Betrieb der App oder Server nicht beeinträchtigen', 'Nicht versuchen, Belohnungs- oder Bewertungssysteme zu umgehen', 'Die Rechte an geistigem Eigentum respektieren'] },
+          { h: '6. Haftungsbeschränkung', p: 'Die App wird "wie besehen" ohne jegliche Gewährleistung, weder ausdrücklich noch stillschweigend, bereitgestellt. Der Entwickler haftet nicht für direkte, indirekte, zufällige oder Folgeschäden, die durch die Nutzung oder Unmöglichkeit der Nutzung der App entstehen.' },
+          { h: '7. Datenschutz', p: 'Ihre Daten werden wie in unserer <a href="https://jcbarcelos.github.io/">Datenschutzerklärung</a> beschrieben behandelt. Wir empfehlen, dieses Dokument zu lesen, um zu verstehen, wie wir Ihre Informationen sammeln, verwenden und schützen.' },
+          { h: '8. Änderungen der Bedingungen', p: 'Diese Bedingungen können regelmäßig aktualisiert werden. Wir werden über wesentliche Änderungen per App oder E-Mail informieren. Die fortgesetzte Nutzung nach Änderungen stellt die Annahme der neuen Bedingungen dar.' },
+          { h: '9. Anwendbares Recht', p: 'Diese Bedingungen unterliegen brasilianischem Recht. Streitigkeiten werden vor dem Gericht von Rio de Janeiro, RJ, entschieden.' },
+          { h: '10. Kontakt', p: 'Bei Fragen oder Anfragen kontaktieren Sie uns bitte:<br>E-Mail: <a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>' },
+        ],
+      },
+      it: {
+        title: 'Termini di Utilizzo',
+        subtitle: 'Quebra-Cabeça — Jigsaw Puzzle',
+        date: 'Ultimo aggiornamento: 4 luglio 2026',
+        intro: 'Scaricando o utilizzando l\'app <strong>Quebra-Cabeça</strong>, accetti i termini e le condizioni descritti di seguito. Se non accetti, non utilizzare l\'app.',
+        sections: [
+          { h: '1. Licenza d\'Uso', p: 'Ti concediamo una licenza limitata, non esclusiva, non trasferibile e revocabile per utilizzare l\'app sul tuo dispositivo personale a scopo di intrattenimento. Non puoi copiare, modificare, distribuire, vendere o decompilare l\'app.' },
+          { h: '2. Proprietà Intellettuale', p: 'Tutti i diritti, titoli e interessi relativi all\'app, inclusi codice sorgente, design, loghi, immagini e marchi, appartengono allo sviluppatore. Le immagini utilizzate nei puzzle sono concesse in licenza o di pubblico dominio. Nessun contenuto può essere riprodotto senza autorizzazione scritta.' },
+          { h: '3. Pubblicità', p: 'L\'app mostra annunci forniti da Google AdMob. Questi annunci possono essere personalizzati in base ai tuoi interessi, come descritto nella nostra <a href="https://jcbarcelos.github.io/">Informativa sulla Privacy</a>. Puoi limitare la personalizzazione degli annunci nelle impostazioni del tuo dispositivo.' },
+          { h: '4. Acquisti In-App', p: 'L\'app offre monete virtuali e sblocco di contenuti tramite annunci o acquisti in-app. Tutte le transazioni sono elaborate dal negozio di applicazioni (Google Play). Le monete virtuali non hanno valore monetario reale e non sono rimborsabili o trasferibili.' },
+          { h: '5. Responsabilità dell\'Utente', ul: ['Non utilizzare l\'app per scopi illegali o non autorizzati', 'Non interferire con il funzionamento dell\'app o dei server', 'Non tentare di eludere i sistemi di ricompensa o punteggio', 'Rispettare i diritti di proprietà intellettuale'] },
+          { h: '6. Limitazione di Responsabilità', p: 'L\'app è fornita "così com\'è", senza garanzie di alcun tipo, espresse o implicite. Lo sviluppatore non è responsabile per danni diretti, indiretti, incidentali o consequenziali derivanti dall\'uso o dall\'impossibilità di utilizzare l\'app.' },
+          { h: '7. Privacy', p: 'I tuoi dati sono trattati come descritto nella nostra <a href="https://jcbarcelos.github.io/">Informativa sulla Privacy</a>. Ti consigliamo di leggere quel documento per capire come raccogliamo, utilizziamo e proteggiamo le tue informazioni.' },
+          { h: '8. Modifiche ai Termini', p: 'Questi termini possono essere aggiornati periodicamente. Ti informeremo delle modifiche significative tramite l\'app o via email. L\'uso continuato dopo le modifiche costituisce accettazione dei nuovi termini.' },
+          { h: '9. Legge Applicabile', p: 'Questi termini sono regolati dalla legge brasiliana. Qualsiasi controversia sarà risolta presso il tribunale di Rio de Janeiro, RJ.' },
+          { h: '10. Contatto', p: 'Per domande o richieste, contattaci:<br>Email: <a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>' },
+        ],
+      },
+      ja: {
+        title: '利用規約',
+        subtitle: 'Quebra-Cabeça — ジグソーパズル',
+        date: '最終更新日: 2026年7月4日',
+        intro: '<strong>Quebra-Cabeça</strong>アプリをダウンロードまたは使用することにより、以下に記載の利用規約に同意したものとみなされます。同意しない場合は、アプリを使用しないでください。',
+        sections: [
+          { h: '1. 使用許諾', p: '当社は、お客様に対し、エンターテイメント目的でお客様の個人デバイスでアプリを使用するための、限定的、非独占的、譲渡不可、取消可能なライセンスを付与します。アプリの複製、修正、配布、販売、またはリバースエンジニアリングはできません。' },
+          { h: '2. 知的財産権', p: 'ソースコード、デザイン、ロゴ、画像、商標を含むアプリに関するすべての権利、権原、利益は開発者に帰属します。パズルで使用される画像はライセンス許諾されているか、パブリックドメインです。事前の書面による許可なくコンテンツを複製することはできません。' },
+          { h: '3. 広告', p: 'アプリはGoogle AdMobが提供する広告を表示します。これらの広告は、当社の<a href="https://jcbarcelos.github.io/">プライバシーポリシー</a>に記載されているように、お客様の興味に基づいてパーソナライズされる場合があります。デバイス設定で広告のパーソナライズを制限できます。' },
+          { h: '4. アプリ内課金', p: 'アプリは、広告またはアプリ内課金を通じて仮想コインとコンテンツのロック解除を提供します。すべての取引はアプリストア（Google Play）によって処理されます。仮想コインには実際の金銭的価値はなく、返金または譲渡はできません。' },
+          { h: '5. ユーザーの責任', ul: ['違法または不正な目的でアプリを使用しないこと', 'アプリまたはサーバーの操作を妨害しないこと', '報酬またはスコアリングシステムを不正に操作しないこと', '知的財産権を尊重すること'] },
+          { h: '6. 責任の制限', p: 'アプリは「現状のまま」提供され、明示または黙示を問わずいかなる種類の保証もありません。開発者は、アプリの使用または使用不能から生じる直接的、間接的、付随的または結果的損害について責任を負いません。' },
+          { h: '7. プライバシー', p: 'お客様のデータは、当社の<a href="https://jcbarcelos.github.io/">プライバシーポリシー</a>に記載されているように扱われます。当社がお客様の情報をどのように収集、使用、保護するかを理解するために、その文書をお読みになることをお勧めします。' },
+          { h: '8. 規約の変更', p: 'これらの規約は随時更新される場合があります。重要な変更については、アプリまたは電子メールで通知します。変更後も継続して使用すると、新しい規約に同意したものとみなされます。' },
+          { h: '9. 準拠法', p: 'これらの規約はブラジル法に準拠します。紛争はリオデジャネイロ市の裁判所で解決されます。' },
+          { h: '10. お問い合わせ', p: 'ご質問やご依頼は、<br>メール：<a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>までお問い合わせください。' },
+        ],
+      },
+      ko: {
+        title: '이용약관',
+        subtitle: 'Quebra-Cabeça — 직소 퍼즐',
+        date: '최종 업데이트: 2026년 7월 4일',
+        intro: '<strong>Quebra-Cabeça</strong> 앱을 다운로드하거나 사용함으로써 귀하는 아래에 설명된 이용약관에 동의하게 됩니다. 동의하지 않는 경우 앱을 사용하지 마십시오.',
+        sections: [
+          { h: '1. 사용 라이선스', p: '당사는 귀하에게 개인 기기에서 엔터테인먼트 목적으로 앱을 사용할 수 있는 제한적, 비독점적, 양도 불가, 취소 가능한 라이선스를 부여합니다. 앱을 복사, 수정, 배포, 판매 또는 리버스 엔지니어링할 수 없습니다.' },
+          { h: '2. 지적 재산권', p: '소스 코드, 디자인, 로고, 이미지 및 상표를 포함한 앱에 관한 모든 권리, 소유권 및 이익은 개발자에게 귀속됩니다. 퍼즐에 사용된 이미지는 라이선스가 부여되었거나 공개 도메인입니다. 사전 서면 승인 없이 콘텐츠를 복제할 수 없습니다.' },
+          { h: '3. 광고', p: '앱은 Google AdMob에서 제공하는 광고를 표시합니다. 이 광고는 당사의 <a href="https://jcbarcelos.github.io/">개인정보 처리방침</a>에 설명된 대로 귀하의 관심사에 따라 개인 맞춤형으로 설정될 수 있습니다. 기기 설정에서 광고 개인 맞춤화를 제한할 수 있습니다.' },
+          { h: '4. 인앱 구매', p: '앱은 광고 또는 인앱 구매를 통해 가상 코인 및 콘텐츠 잠금 해제를 제공합니다. 모든 거래는 앱 스토어(Google Play)에서 처리됩니다. 가상 코인은 실제 금전적 가치가 없으며 환불 또는 양도가 불가능합니다.' },
+          { h: '5. 사용자 책임', ul: ['불법 또는 승인되지 않은 목적으로 앱을 사용하지 않음', '앱 또는 서버 작동을 방해하지 않음', '보상 또는 점수 시스템을 속이려 하지 않음', '지적 재산권 존중'] },
+          { h: '6. 책임 제한', p: '앱은 "있는 그대로" 제공되며, 명시적이거나 묵시적인 어떠한 종류의 보증도 없습니다. 개발자는 앱 사용 또는 사용 불능으로 인해 발생하는 직접적, 간접적, 부수적 또는 결과적 손해에 대해 책임을 지지 않습니다.' },
+          { h: '7. 개인정보', p: '귀하의 데이터는 당사의 <a href="https://jcbarcelos.github.io/">개인정보 처리방침</a>에 설명된 대로 처리됩니다. 당사가 귀하의 정보를 수집, 사용 및 보호하는 방법을 이해하기 위해 해당 문서를 읽어보시기 바랍니다.' },
+          { h: '8. 약관 변경', p: '이 약관은 수시로 업데이트될 수 있습니다. 중요한 변경 사항은 앱 또는 이메일을 통해 알려드립니다. 변경 후에도 계속 사용하면 새로운 약관에 동의한 것으로 간주됩니다.' },
+          { h: '9. 준거법', p: '이 약관은 브라질 법률의 적용을 받습니다. 모든 분쟁은 리우데자네이루 시 법원에서 해결됩니다.' },
+          { h: '10. 연락처', p: '문의 사항이나 요청이 있으시면<br>이메일: <a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>으로 연락해 주십시오.' },
+        ],
+      },
+      zh: {
+        title: '使用条款',
+        subtitle: 'Quebra-Cabeça — 拼图游戏',
+        date: '最后更新：2026年7月4日',
+        intro: '通过下载或使用<strong>Quebra-Cabeça</strong>应用程序，即表示您同意下述条款和条件。如果您不同意，请勿使用该应用程序。',
+        sections: [
+          { h: '1. 使用许可', p: '我们授予您有限的、非排他的、不可转让的、可撤销的许可，以在您的个人设备上出于娱乐目的使用本应用程序。您不得复制、修改、分发、出售或反向工程本应用程序。' },
+          { h: '2. 知识产权', p: '与本应用程序相关的所有权利、所有权和利益，包括源代码、设计、徽标、图像和商标，均归开发者所有。拼图中使用的图像已获得许可或属于公共领域。未经事先书面授权，不得复制任何内容。' },
+          { h: '3. 广告', p: '本应用程序显示由Google AdMob提供的广告。这些广告可能会根据您的兴趣进行个性化设置，如我们的<a href="https://jcbarcelos.github.io/">隐私政策</a>所述。您可以在设备设置中限制广告个性化。' },
+          { h: '4. 应用内购买', p: '本应用程序通过广告或应用内购买提供虚拟硬币和内容解锁。所有交易均由应用商店（Google Play）处理。虚拟硬币没有实际货币价值，不可退款或转让。' },
+          { h: '5. 用户责任', ul: ['不得将应用程序用于非法或未经授权的目的', '不得干扰应用程序或服务器的运行', '不得试图欺骗奖励或评分系统', '尊重知识产权'] },
+          { h: '6. 责任限制', p: '本应用程序按"原样"提供，不提供任何明示或暗示的保证。开发者不对因使用或无法使用本应用程序而引起的任何直接、间接、附带或后果性损害负责。' },
+          { h: '7. 隐私', p: '您的数据将按照我们的<a href="https://jcbarcelos.github.io/">隐私政策</a>所述进行处理。我们建议您阅读该文件，以了解我们如何收集、使用和保护您的信息。' },
+          { h: '8. 条款变更', p: '这些条款可能会定期更新。我们将通过应用程序或电子邮件通知重大变更。变更后继续使用即表示接受新条款。' },
+          { h: '9. 适用法律', p: '这些条款受巴西法律管辖。任何争议将在里约热内卢市法院解决。' },
+          { h: '10. 联系方式', p: '如有疑问或请求，请联系我们：<br>电子邮件：<a href="mailto:contato@rcsbinfo.com">contato@rcsbinfo.com</a>' },
+        ],
+      },
+    };
+
+    function render(lang) {
+      const data = t[lang];
+      if (!data) return;
+      let html = '<h1>' + data.title + '</h1>';
+      html += '<p><strong>' + data.subtitle + '</strong></p>';
+      html += '<p class="date">' + data.date + '</p>';
+      html += '<p>' + data.intro + '</p>';
+      for (const s of data.sections) {
+        html += '<h2>' + s.h + '</h2>';
+        if (s.p) html += '<p>' + s.p + '</p>';
+        if (s.ul) {
+          html += '<ul>';
+          for (const li of s.ul) html += '<li>' + li + '</li>';
+          html += '</ul>';
+        }
+      }
+      document.getElementById('content').innerHTML = html;
+      document.title = data.title + ' — Quebra-Cabeça';
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+    }
+
+    const sel = document.getElementById('langSelect');
+    const saved = localStorage.getItem('terms_lang');
+    if (saved && langs.includes(saved)) sel.value = saved;
+    render(sel.value);
+    sel.addEventListener('change', function() {
+      localStorage.setItem('terms_lang', this.value);
+      render(this.value);
+    });
+  </script>
+</body>
+</html>
